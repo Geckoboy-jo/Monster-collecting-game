@@ -7,7 +7,7 @@ $(target):
 	g++ -o $(target) $(CPP) $(HPP)
 	chmod o=rwx $(target)
 clean:
-	rm -f $(Target)
+	rm -f game
 save:
 	git add $(CPP) $(HPP) $(other)
 	git commit -m "new stuff"
