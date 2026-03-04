@@ -10,7 +10,7 @@ void wrapper::preGame()
     //plantIndex->printInOrder();
     cout<<"retrieving gameData"<<endl;
     retrievGameData();
-    gameShop->getInventory()->printList();
+    
     //invenctory printed
     cout<<"gameData retrieved"<<endl;
     gameShop->setAmbaince();
@@ -134,7 +134,7 @@ void wrapper::retrievGameData()
         currentPlant->setSoilNutrientsLevel(stof(token));
         getline(ss, token, '\0');
         currentPlant->setForSale(stoi(token));
-        gameShop->getInventory()->insertAtFront(currentPlant);
+        gameShop->getPlantInventory()->insertAtFront(currentPlant);
     }
 }
 
@@ -142,8 +142,8 @@ void wrapper::saveGameData()
 {
     fstream file("gameData.csv", ios::out);
     file<<"ID,age,canProduce,hasFruit,health,soilNutrientsLevel,ForSale\n";
-    list* inventory = gameShop->getInventory();
-    ListNode* current = inventory->getPHead();
+    list<plant*>* inventory = gameShop->getPlantInventory();
+    ListNode<plant*>* current = inventory->getHead();
     while(current != nullptr)
     {
         plant* currentPlant = current->getData();

@@ -9,7 +9,7 @@ void game::RunGame()
 }
 bool game::gameLoop()
 {
-    if(getuserInput() == 1) gameWrapper->getGameShop()->getInventory()->printList();
+    if(getuserInput() == 1) gameWrapper->getGameShop()->getPlantInventory()->printList();
     else if(getuserInput() == 2) gameWrapper->getPlantIndex()->printInOrder();
     else if(getuserInput() == 3) waterPlant();
     else if(getuserInput() == 4) gameWrapper->getCurrentUser()->printUserInfo();
@@ -38,16 +38,19 @@ void game::waterPlant()
     {
         cout<<"which plant would you like to water?"<<endl;
         cout<<"==============="<<endl;
-        ListNode* pMem = gameWrapper->getGameShop()->getInventory()->getPHead();
+        ListNode<plant*>* pMem = gameWrapper->getGameShop()->getPlantInventory()->getHead();
         int index = 1;
-        while(pMem != nullptr) cout<<index++<<". "<<pMem->getData()->getName()<<endl;
+        while(pMem != nullptr) {
+            cout<<index++<<". "<<pMem->getData()->getName()<<endl;
+            pMem = pMem->getNext();
+        }
         string input;
         cin>>input;
         try
         {
             int choice = stoi(input);
             if(choice<1 || choice>=index) throw out_of_range("invalid input, try again");
-            plant* chosenPlant = gameWrapper->getGameShop()->getInventory()->getAtIndex(choice-1)->getData();
+            plant* chosenPlant = gameWrapper->getGameShop()->getPlantInventory()->getAtIndex(choice-1)->getData();
             chosenPlant->setWaterHas(chosenPlant->getWaterHas()+1);
             cout<<"you watered "<<chosenPlant->getName()<<", its health is now "<<chosenPlant->getHealth()<<endl;
             break;

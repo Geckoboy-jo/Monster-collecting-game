@@ -3,8 +3,8 @@
 
 void shop::setAmbaince()
 {
-    list* shopInventory = getInventory();
-    ListNode* pMem = shopInventory->getPHead();
+    list<plant*>* plants = getPlantInventory();
+    ListNode<plant*>* pMem = plants->getHead();
     int index =0;
 
     while(pMem != nullptr)
@@ -12,7 +12,7 @@ void shop::setAmbaince()
         pMem->getData()->setEntityID(index);
         pMem->getData()->setTemperatureHas(getAmbientTemp());
         pMem->getData()->setSunHas(getAmbientSunlight());
-        if(pMem->getData()->getIsAlive() == false) shopInventory->removeFromIndex(index);
+        if(pMem->getData()->getIsAlive() == false) plants->removeFromIndex(index);
         else index++;
         pMem = pMem->getNext();
     }
