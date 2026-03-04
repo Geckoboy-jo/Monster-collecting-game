@@ -11,6 +11,7 @@ private:
     void retrievwUserInfo();
     void populateTree();
     void retrievGameData();
+    void retrieveInventory();
     void saveGameData();
 public:
     wrapper(){

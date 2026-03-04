@@ -10,7 +10,7 @@ clean:
 	rm -f game
 save:
 	git add $(CPP) $(HPP) $(other)
-	git commit -m "new stuff"
+	git commit
 	git push
 reset:
 	clear 

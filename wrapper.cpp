@@ -10,7 +10,7 @@ void wrapper::preGame()
     //plantIndex->printInOrder();
     cout<<"retrieving gameData"<<endl;
     retrievGameData();
-    
+    retrieveInventory();
     //invenctory printed
     cout<<"gameData retrieved"<<endl;
     gameShop->setAmbaince();
@@ -156,4 +156,24 @@ void wrapper::saveGameData()
     user* currentUser = getCurrentUser();
     userFile<<currentUser->getUserName()<<","<<currentUser->getPassword()<<","<<currentUser->getDisplayName()<<","<<currentUser->getID()<<","<<currentUser->getLevel()<<"\n";
     userFile.close();
+}
+
+
+void wrapper::retrieveInventory()
+{
+    fstream file("inventory.csv");
+    string line, token;
+    getline(file, line);//header line
+    while(getline(file, line))
+    {
+        stringstream ss(line);
+        getline(ss, token, ',');
+        item* newItem = new item();
+        newItem->setName(token);
+        getline(ss, token, ',');
+        newItem->setID(stoi(token));
+        getline(ss, token, ',');
+        newItem->setQuantity(stoi(token));
+        gameShop->getItemInventory()->insertAtFront(newItem);
+    }
 }
