@@ -9,7 +9,7 @@ void wrapper::runGame()
 
 void wrapper::retrievwUserInfo()
 {
-    fstream file("userData.csv", ios::in);
+    fstream file("userData.csv");
     string line, token;
     line = "hello";
     user* newUser = new user();
