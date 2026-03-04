@@ -1,8 +1,9 @@
-#include "wrapper.hpp"
+#include "game.hpp"
 
 int main()
 {
-    wrapper* game = new wrapper();
-    game->runGame();
+    game* myGame = new game();
+    myGame->RunGame();
+    delete myGame;
     return 0;
 }

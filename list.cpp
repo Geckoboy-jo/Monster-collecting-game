@@ -43,3 +43,14 @@ void list::removeFromIndex(int index)
     pMem->setNext(temp->getNext());
     delete temp;
 }
+ListNode* list::getAtIndex(int index)
+{
+    ListNode* pMem = getPHead();
+    int currentIndex = 0;
+    while(pMem != nullptr && currentIndex < index)
+    {
+        pMem = pMem->getNext();
+        currentIndex++;
+    }
+    return pMem;
+}

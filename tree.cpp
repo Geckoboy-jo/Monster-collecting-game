@@ -4,13 +4,13 @@
 
 void BST::insert(plant* newPlant){
     Node* newNode = new Node(newPlant);
-    cout<<"newNode made" <<endl;
+    //cout<<"newNode made" <<endl;
     if(pRoot == nullptr) setRoot(newNode); 
     else insert(newNode, pRoot);
 }
 void BST::insert(Node* newNode, Node* pNode)
 {
-    cout<<"wrong bu still alive" << endl;
+    //cout<<"wrong bu still alive" << endl;
     if(newNode->getData()->getID() < pNode->getData()->getID())
     {
         if(pNode->getLeft() == nullptr) pNode->setLeft(newNode);

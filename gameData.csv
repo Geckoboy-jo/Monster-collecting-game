@@ -1,1 +1,2 @@
-plant ID, age, can produce,has fruit, health, soil quaity, for sale
+ID,age,canProduce,hasFruit,health,soilNutrientsLevel,ForSale
+1,10,1,1,11,9,0

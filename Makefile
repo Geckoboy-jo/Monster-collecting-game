@@ -1,5 +1,5 @@
-CPP = main.cpp wrapper.cpp user.cpp plant.cpp tree.cpp list.cpp shop.cpp
-HPP = top.hpp wrapper.hpp user.hpp plant.hpp tree.hpp list.hpp shop.hpp
+CPP = main.cpp wrapper.cpp user.cpp plant.cpp tree.cpp list.cpp shop.cpp game.cpp
+HPP = top.hpp wrapper.hpp user.hpp plant.hpp tree.hpp list.hpp shop.hpp game.hpp
 other = Makefile userData.csv plants.csv gameData.csv
 target = game
 

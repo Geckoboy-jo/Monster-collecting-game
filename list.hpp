@@ -36,4 +36,5 @@ public:
     void removeFromFront();
     void printList(); 
     void removeFromIndex(int index);
+    ListNode* getAtIndex(int index);
 }; 

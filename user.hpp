@@ -14,7 +14,7 @@ public:
     ~user(){}
     //getters and setters
     string getUserName(){return userName;}
-    string getPasword(){return password;}
+    string getPassword(){return password;}
     string getDisplayName(){return displayName;}
     int getID(){return ID;}
     int getLevel(){return level;}

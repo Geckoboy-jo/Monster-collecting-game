@@ -1,7 +1,7 @@
 #include "wrapper.hpp"
 
 
-void wrapper::runGame()
+void wrapper::preGame()
 {
     retrievwUserInfo();
     currentUser->printUserInfo();
@@ -15,6 +15,7 @@ void wrapper::runGame()
     cout<<"gameData retrieved"<<endl;
     gameShop->setAmbaince();
     //ambiance set
+    //saveGameData();
 
 }
 
@@ -24,6 +25,7 @@ void wrapper::retrievwUserInfo()
     string line, token;
     line = "hello";
     user* newUser = new user();
+    getline(file, line);//header line
     getline(file, line);
     stringstream ss(line);
     getline(ss, token, ',');
@@ -119,6 +121,9 @@ void wrapper::retrievGameData()
         if(currentPlant == nullptr) continue;
         getline(ss, token, ',');
         currentPlant->setAge(stof(token));
+        if(currentPlant->getAge()>=0 && currentPlant->getAge()<5*currentPlant->getGrowRate()) currentPlant->setMaturity(seedling);
+        else if(currentPlant->getAge()>=5*currentPlant->getGrowRate() && currentPlant->getAge()<10*currentPlant->getGrowRate()) currentPlant->setMaturity(juvenile);
+        else if(currentPlant->getAge()>=10*currentPlant->getGrowRate()) currentPlant->setMaturity(adult);
         getline(ss, token, ',');
         currentPlant->setCanProduce(stoi(token));
         getline(ss, token, ',');
@@ -129,5 +134,26 @@ void wrapper::retrievGameData()
         currentPlant->setSoilNutrientsLevel(stof(token));
         getline(ss, token, '\0');
         currentPlant->setForSale(stoi(token));
+        gameShop->getInventory()->insertAtFront(currentPlant);
     }
+}
+
+void wrapper::saveGameData()
+{
+    fstream file("gameData.csv", ios::out);
+    file<<"ID,age,canProduce,hasFruit,health,soilNutrientsLevel,ForSale\n";
+    list* inventory = gameShop->getInventory();
+    ListNode* current = inventory->getPHead();
+    while(current != nullptr)
+    {
+        plant* currentPlant = current->getData();
+        file<<currentPlant->getID()<<","<<currentPlant->getAge()<<","<<currentPlant->getCanProduce()<<","<<currentPlant->getHasFruit()<<","<<currentPlant->getHealth()<<","<<currentPlant->getSoilNutrientsLevel()<<","<<currentPlant->getForSale()<<"\n";
+        current = current->getNext();
+    }
+    file.close();
+    fstream userFile("userData.csv", ios::out);
+    userFile<<"userName,password,displayName,ID,level\n";
+    user* currentUser = getCurrentUser();
+    userFile<<currentUser->getUserName()<<","<<currentUser->getPassword()<<","<<currentUser->getDisplayName()<<","<<currentUser->getID()<<","<<currentUser->getLevel()<<"\n";
+    userFile.close();
 }
