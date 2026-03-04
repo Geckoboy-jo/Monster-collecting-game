@@ -156,6 +156,15 @@ void wrapper::saveGameData()
     user* currentUser = getCurrentUser();
     userFile<<currentUser->getUserName()<<","<<currentUser->getPassword()<<","<<currentUser->getDisplayName()<<","<<currentUser->getID()<<","<<currentUser->getLevel()<<"\n";
     userFile.close();
+    fstream inventoryFile("inventory.csv", ios::out);
+    inventoryFile<<"itemID,item name,quantity\n";
+    ListNode<item*>* currentItem = gameShop->getItemInventory()->getHead();
+    while(currentItem != nullptr)   {
+        item* currentItemData = currentItem->getData();
+        inventoryFile<<currentItemData->getID()<<","<<currentItemData->getName()<<","<<currentItemData->getQuantity()<<"\n";
+        currentItem = currentItem->getNext();
+    }
+    inventoryFile.close();
 }
 
 
@@ -169,9 +178,9 @@ void wrapper::retrieveInventory()
         stringstream ss(line);
         getline(ss, token, ',');
         item* newItem = new item();
-        newItem->setName(token);
-        getline(ss, token, ',');
         newItem->setID(stoi(token));
+        getline(ss, token, ',');
+        newItem->setName(token);
         getline(ss, token, ',');
         newItem->setQuantity(stoi(token));
         gameShop->getItemInventory()->insertAtFront(newItem);

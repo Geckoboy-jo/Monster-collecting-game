@@ -9,6 +9,7 @@ private:
     float ambientSunlight;
     list<item*>* itemInventory;
 
+
 public:
     shop(int temp, int sunlight)
     {
@@ -23,8 +24,6 @@ public:
     float getAmbientSunlight(){return ambientSunlight;}
     list<plant*>* getPlantInventory(){return plantInventory;}
     list<item*>* getItemInventory(){return itemInventory;}
-
-
 
     void setAmbientTemp(float newTemp){ambientTemp = newTemp;}
     void setAmbientSunlight(float newSunlight){ambientSunlight = newSunlight;}

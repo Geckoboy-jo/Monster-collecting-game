@@ -78,7 +78,7 @@ void plant::printPlantData()
     cout<<"Temperature Needs High: "<<fixed<<setprecision(2)<<getTemperatureNeedsHigh()<<endl;
     cout<<"Temperature Needs Low: "<<fixed<<setprecision(2)<<getTemperatureNeedsLow()<<endl;
     cout<<"Temperature Has: "<<fixed<<setprecision(2)<<getTemperatureHas()<<endl;
-
+    cout<<"=============="<<endl;
 
 }
 

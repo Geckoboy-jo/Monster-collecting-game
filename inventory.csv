@@ -1,3 +1,4 @@
-itemID, item name, quntity
-1, apple seed, 10
-2, bamboo seed, 10
+itemID,item name,quantity
+2, bamboo seed,10
+1, apple seed,10
+0, money,0

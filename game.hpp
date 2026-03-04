@@ -9,7 +9,7 @@ private:
     wrapper* getGameWrapper(){return gameWrapper;}
     void setGameWrapper(wrapper* newWrapper){gameWrapper = newWrapper;}
     //private member functions
-    bool gameLoop();
+    void gameLoop();
     void waterPlant();
     int getuserInput();
 public:

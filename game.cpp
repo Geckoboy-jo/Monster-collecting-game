@@ -4,18 +4,23 @@
 void game::RunGame()
 {
     gameWrapper->preGame();
-    while(gameLoop());
+    gameLoop();
     
 }
-bool game::gameLoop()
+void game::gameLoop()
 {
-    if(getuserInput() == 1) gameWrapper->getGameShop()->getPlantInventory()->printList();
-    else if(getuserInput() == 2) gameWrapper->getPlantIndex()->printInOrder();
-    else if(getuserInput() == 3) waterPlant();
-    else if(getuserInput() == 4) gameWrapper->getCurrentUser()->printUserInfo();
-    else if(getuserInput() == 5) return false;
-    return true;
+    while(true)
+    {
+        int userChoice = getuserInput();
+        if(userChoice == 1) gameWrapper->getGameShop()->getPlantInventory()->printList();
+        else if(userChoice == 2) gameWrapper->getPlantIndex()->printInOrder();
+        else if(userChoice == 3) waterPlant();
+        else if(userChoice == 4) gameWrapper->getCurrentUser()->printUserInfo();
+        else if(userChoice == 5) break;
+        else cout<<"invalid input, try again"<<endl;
+    }
 }
+
 int game::getuserInput()
 {
     while(true)
@@ -52,7 +57,7 @@ void game::waterPlant()
             if(choice<1 || choice>=index) throw out_of_range("invalid input, try again");
             plant* chosenPlant = gameWrapper->getGameShop()->getPlantInventory()->getAtIndex(choice-1)->getData();
             chosenPlant->setWaterHas(chosenPlant->getWaterHas()+1);
-            cout<<"you watered "<<chosenPlant->getName()<<", its health is now "<<chosenPlant->getHealth()<<endl;
+            cout<<"you watered "<<chosenPlant->getName()<<" it now has "<<fixed<<setprecision(2)<<chosenPlant->getWaterHas()<<" water"<<endl;
             break;
         }
         catch(invalid_argument& e){cout<<"invalid input, try again"<<endl;}
