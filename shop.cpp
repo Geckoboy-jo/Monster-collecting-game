@@ -13,7 +13,7 @@ void shop::setAmbaince()
         pMem->getData()->setTemperatureHas(getAmbientTemp());
         pMem->getData()->setSunHas(getAmbientSunlight());
         if(pMem->getData()->getIsAlive() == false) shopInventory->removeFromIndex(index);
+        else index++;
         pMem = pMem->getNext();
-        index++;
     }
 }

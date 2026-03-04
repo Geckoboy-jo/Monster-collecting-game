@@ -34,7 +34,7 @@ void BST::destroyTree(Node* node)
     
 }
 
-plant* BST::search(float ID)
+plant* BST::search(int ID)
 {
     Node* current = pRoot;
     while(current != nullptr)

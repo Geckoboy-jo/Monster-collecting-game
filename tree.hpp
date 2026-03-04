@@ -36,7 +36,7 @@ public:
     void setRoot(Node* newRoot){pRoot = newRoot;}
     //public member functions
     void insert(plant* newPlant);
-    plant* search(float ID);
+    plant* search(int ID);
     void printInOrder();
     void destroyTree();
 

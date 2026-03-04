@@ -81,3 +81,33 @@ void plant::printPlantData()
 
 
 }
+
+plant::plant(plant* copy)
+{
+    name = copy->getName();
+    ID = copy->getID();
+    entityID = copy->getEntityID();
+    growRate = copy->getGrowRate();
+    canProduce = copy->getCanProduce();
+    yeild = copy->getYeild();
+    age = copy->getAge();
+    maturity = copy->getMaturity();
+    hasFruit = copy->getHasFruit();
+    waterNeedsMin = copy->getWaterNeedsMin();
+    waterNeedsMax = copy->getWaterNeedsMax();
+    waterHas = copy->getWaterHas();
+    sunNeedsMin = copy->getSunNeedsMin();
+    sunNeedsMax = copy->getSunNeedsMax();
+    sunHas = copy->getSunHas();
+    maxHealth = copy->getMaxHealth();
+    health = copy->getHealth();
+    isAlive = copy->getIsAlive();
+    canDie = copy->getCanDie();
+    value = copy->getValue();
+    ForSale = copy->getForSale();
+    soilNutrientsLevelMax = copy->getSoilNutrientsLevelMax();
+    soilNutrientsLevel = copy->getSoilNutrientsLevel();
+    temperatureNeedsHigh = copy->getTemperatureNeedsHigh();
+    temperatureNeedsLow = copy->getTemperatureNeedsLow();
+    temperatureHas = copy->getTemperatureHas();
+}

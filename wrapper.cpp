@@ -8,7 +8,14 @@ void wrapper::runGame()
     populateTree();
     cout<<"tree popualted"<<endl; 
     //plantIndex->printInOrder();
-    
+    cout<<"retrieving gameData"<<endl;
+    retrievGameData();
+    gameShop->getInventory()->printList();
+    //invenctory printed
+    cout<<"gameData retrieved"<<endl;
+    gameShop->setAmbaince();
+    //ambiance set
+
 }
 
 void wrapper::retrievwUserInfo()
@@ -97,5 +104,30 @@ void wrapper::populateTree()
         plantIndex->insert(newPlant);
         cout<<"flag"  <<endl;
 
+    }
+}
+void wrapper::retrievGameData()
+{
+    fstream file("gameData.csv");
+    string line, token;
+    getline(file, line);//header line
+    while(getline(file, line))
+    {
+        stringstream ss(line);
+        getline(ss, token, ',');
+        plant* currentPlant = new plant(plantIndex->search(stoi(token)));
+        if(currentPlant == nullptr) continue;
+        getline(ss, token, ',');
+        currentPlant->setAge(stof(token));
+        getline(ss, token, ',');
+        currentPlant->setCanProduce(stoi(token));
+        getline(ss, token, ',');
+        currentPlant->setHasFruit(stoi(token));
+        getline(ss, token, ',');
+        currentPlant->setHealth(stof(token));
+        getline(ss, token, ',');
+        currentPlant->setSoilNutrientsLevel(stof(token));
+        getline(ss, token, '\0');
+        currentPlant->setForSale(stoi(token));
     }
 }

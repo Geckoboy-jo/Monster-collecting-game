@@ -17,10 +17,13 @@ private:
     //private member functions
     void retrievwUserInfo();
     void populateTree();
+    void retrievGameData();
 public:
     wrapper(){
         currentUser = nullptr;
-        plantIndex = new BST();}
+        plantIndex = new BST();
+        gameShop = new shop(60, 5);
+    }
     ~wrapper(){}
     //member funtions
     void runGame();

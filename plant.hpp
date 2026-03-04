@@ -83,6 +83,7 @@ public:
         temperatureNeedsLow = 0;
         temperatureHas = (temperatureNeedsHigh + temperatureNeedsLow)/2;
     }
+    plant(plant* copy);
     ~plant(){}
     //getters and setters
     string getName(){return name;}
