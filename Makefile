@@ -1,6 +1,6 @@
-CPP = main.cpp wrapper.cpp user.cpp
-HPP = top.hpp wrapper.hpp user.hpp
-other = Makefile userData.csv
+CPP = main.cpp wrapper.cpp user.cpp plant.cpp tree.cpp
+HPP = top.hpp wrapper.hpp user.hpp plant.hpp tree.hpp
+other = Makefile userData.csv plants.csv
 target = game
 
 $(target):

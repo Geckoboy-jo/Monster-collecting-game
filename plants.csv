@@ -1,0 +1,2 @@
+name,ID,growRate,yeild,waterNeeds,sunNeeds,maxHealth,can_die,value,temperatureNeedsHigh,temperatureNeedsLow
+apple tree,1,1,1,3,3,12,0,10,200,40

@@ -1,4 +1,4 @@
-#include "user.hpp"
+#include "tree.hpp"
 
 class wrapper
 {
@@ -10,6 +10,7 @@ private:
     void setCurrentUser(user* newUser){currentUser = newUser;}
     //private member functions
     void retrievwUserInfo();
+    void populateTree();
 public:
     wrapper(){}
     ~wrapper(){}
