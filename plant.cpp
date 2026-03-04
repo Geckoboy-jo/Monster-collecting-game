@@ -16,7 +16,7 @@ void plant::ageCycle()
         }
         if(getWaterHas() < getWaterNeedsMin()) setHealth(getHealth() - 1);
         if(getSunHas() < getSunNeedsMin()) setHealth(getHealth() - 1);
-        if(getTemperatureNeedsLow() < getTemperatureHas()) setHealth(getHealth() - 1);
+        if(getTemperatureNeedsLow() > getTemperatureHas()) setHealth(getHealth() - 1);
         if(getSoilNutrientsLevel() < 0) setHealth(getHealth() - 1);
         if(getWaterHas() > getWaterNeedsMax()) setHealth(getHealth() - 1);
         if(getSunHas() > getSunNeedsMax()) setHealth(getHealth() - 1);
@@ -34,6 +34,7 @@ void plant::ageCycle()
     }
     else
     {
+        setAge(getAge() + 1);
         if((getWaterHas()> getWaterNeedsMin())&& (getSunHas() > getSunNeedsMin()) && (getTemperatureHas() >= getTemperatureNeedsLow()))
         {
             if(getTemperatureHas() <= getTemperatureNeedsHigh()) setHealth(getHealth() + 1);
@@ -42,6 +43,7 @@ void plant::ageCycle()
         if(getHealth() > maxHealth) setHealth(maxHealth);
         if(getHealth() < 0) setHealth(0);
     }
+    if(static_cast<int>(getAge()) % 7 == 0) setWaterHas(0);
 }
 
 void plant::printPlantData()

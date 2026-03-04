@@ -132,8 +132,10 @@ void wrapper::retrievGameData()
         currentPlant->setHealth(stof(token));
         getline(ss, token, ',');
         currentPlant->setSoilNutrientsLevel(stof(token));
-        getline(ss, token, '\0');
+        getline(ss, token, ',');
         currentPlant->setForSale(stoi(token));
+        getline(ss, token, '\0');
+        currentPlant->setWaterHas(stof(token));
         gameShop->getPlantInventory()->insertAtFront(currentPlant);
     }
 }
@@ -141,13 +143,13 @@ void wrapper::retrievGameData()
 void wrapper::saveGameData()
 {
     fstream file("gameData.csv", ios::out);
-    file<<"ID,age,canProduce,hasFruit,health,soilNutrientsLevel,ForSale\n";
+    file<<"ID,age,canProduce,hasFruit,health,soilNutrientsLevel,ForSale,waterHas\n";
     list<plant*>* inventory = gameShop->getPlantInventory();
     ListNode<plant*>* current = inventory->getHead();
     while(current != nullptr)
     {
         plant* currentPlant = current->getData();
-        file<<currentPlant->getID()<<","<<currentPlant->getAge()<<","<<currentPlant->getCanProduce()<<","<<currentPlant->getHasFruit()<<","<<currentPlant->getHealth()<<","<<currentPlant->getSoilNutrientsLevel()<<","<<currentPlant->getForSale()<<"\n";
+        file<<currentPlant->getID()<<","<<currentPlant->getAge()<<","<<currentPlant->getCanProduce()<<","<<currentPlant->getHasFruit()<<","<<currentPlant->getHealth()<<","<<currentPlant->getSoilNutrientsLevel()<<","<<currentPlant->getForSale()<<","<<currentPlant->getWaterHas()<<"\n";
         current = current->getNext();
     }
     file.close();
