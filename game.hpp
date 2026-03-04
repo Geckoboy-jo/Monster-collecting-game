@@ -13,6 +13,9 @@ private:
     void waterPlant();
     int getuserInput();
     void passTime();
+    void repotPlant();
+    void harvestPlant();
+    void getSeed(int plantID);
 public:
     game(){gameWrapper = new wrapper();}
     ~game(){delete gameWrapper;}
