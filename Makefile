@@ -1,5 +1,5 @@
-CPP = main.cpp wrapper.cpp
-HPP = top.hpp wrapper.hpp
+CPP = main.cpp wrapper.cpp user.cpp
+HPP = top.hpp wrapper.hpp user.hpp
 other = Makefile
 target = game
 
