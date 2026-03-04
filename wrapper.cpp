@@ -7,7 +7,8 @@ void wrapper::runGame()
     currentUser->printUserInfo();
     populateTree();
     cout<<"tree popualted"<<endl; 
-    plantIndex->printInOrder();
+    //plantIndex->printInOrder();
+    
 }
 
 void wrapper::retrievwUserInfo()
@@ -56,12 +57,22 @@ void wrapper::populateTree()
         newPlant->setHasFruit(0);
         getline(ss, token, ',');
         //cout<<token<<endl;
-        newPlant->setWaterNeeds(stof(token));
+        newPlant->setWaterNeedsMin(stof(token));
         newPlant->setWaterHas(0);
         getline(ss, token, ',');
         //cout<<token<<endl;
-        newPlant->setSunNeeds(stof(token));
+        newPlant->setWaterNeedsMax(stof(token));
+        newPlant->setWaterHas(0);
+        getline(ss, token, ',');
+        //cout<<token<<endl;
+        newPlant->setSunNeedsMin(stof(token));
         newPlant->setSunHas(0);
+
+        getline(ss, token, ',');
+        //cout<<token<<endl;
+        newPlant->setSunNeedsMax(stof(token));
+        newPlant->setSunHas(0);
+        
         getline(ss, token, ',');
         //cout<<token<<endl;
         newPlant->setMaxHealth(stof(token));
