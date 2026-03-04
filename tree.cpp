@@ -51,7 +51,7 @@ void BST::printInOrder(Node* node)
 {
     
     if(node->getLeft()!=nullptr) printInOrder(node->getLeft());
-    node->getData()->printPlantData();
+    node->getData()->printPlantDataPerminent();
     if(node->getRight()!=nullptr) printInOrder(node->getRight());
     
 }

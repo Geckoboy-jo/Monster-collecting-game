@@ -17,11 +17,12 @@ void plant::ageCycle()
         if(getWaterHas() < getWaterNeedsMin()) setHealth(getHealth() - 1);
         if(getSunHas() < getSunNeedsMin()) setHealth(getHealth() - 1);
         if(getTemperatureNeedsLow() > getTemperatureHas()) setHealth(getHealth() - 1);
-        if(getSoilNutrientsLevel() < 0) setHealth(getHealth() - 1);
+        if(getSoilNutrientsLevel() <= 0) setHealth(getHealth() - 1);
         if(getWaterHas() > getWaterNeedsMax()) setHealth(getHealth() - 1);
         if(getSunHas() > getSunNeedsMax()) setHealth(getHealth() - 1);
         if(getTemperatureHas() > getTemperatureNeedsHigh()) setHealth(getHealth() - 1);
         soilNutrientsLevel--;
+        if(soilNutrientsLevel < 0) soilNutrientsLevel = 0;
         if((getWaterHas()> getWaterNeedsMin())&& (getSunHas() > getSunNeedsMin()) && (getTemperatureHas() >= getTemperatureNeedsLow()))
         {
             if(getTemperatureHas() <= getTemperatureNeedsHigh()) setHealth(getHealth() + 1);
@@ -39,47 +40,52 @@ void plant::ageCycle()
         {
             if(getTemperatureHas() <= getTemperatureNeedsHigh()) setHealth(getHealth() + 1);
         } 
-        if(getHealth() >= (3/getMaxHealth())/4) setCanProduce(true);
+        if(getHealth() >= (3/4)*getMaxHealth()) setCanProduce(true);
         if(getHealth() > maxHealth) setHealth(maxHealth);
         if(getHealth() < 0) setHealth(0);
     }
     if(static_cast<int>(getAge()) % 7 == 0) setWaterHas(0);
 }
 
-void plant::printPlantData()
+void plant::printPlantDataPerminent()
 {
     cout<<"=============="<<endl;
     cout<<"Name: " + getName()<<endl;
     cout<<"ID: "<<getID()<<endl;
-    cout<<"Entity ID: "<<getEntityID()<<endl;
     cout<<"Growth Rate: "<<fixed<<setprecision(2)<<getGrowRate()*10<<" days to grow"<<endl;
-    if(getCanProduce() == true) cout<<"Can Produce: true"<<endl;
-    else cout<<"Can Produce: false"<<endl;
     cout<<"Yeild: "<<fixed<<setprecision(2)<<(getYeild()/3)<<" fruit per day"<<endl;
-    cout<<"Age: "<<fixed<<setprecision(2)<<getAge()<<" days"<<endl;
-    cout<<"Maturity: "<<to_string(getMaturity())<<endl;
-    if(getHasFruit() == true) cout<<"Has Fruit: true"<<endl;
-    else cout<<"Has Fruit: false"<<endl;
-    cout<<"Water Needs minimum: "<<fixed<<setprecision(2)<<getWaterNeedsMin()<<endl;
-    cout<<"Water Needs maximum: "<<fixed<<setprecision(2)<<getWaterNeedsMax()<<endl;
-    cout<<"Water Has: "<<fixed<<setprecision(2)<<getWaterHas()<<endl;
-    cout<<"Sun Needs minimum: "<<fixed<<setprecision(2)<<getSunNeedsMin()<<endl;
-    cout<<"Sun Needs maximum: "<<fixed<<setprecision(2)<<getSunNeedsMax()<<endl;
-    cout<<"Sun Has: "<<fixed<<setprecision(2)<<getSunHas()<<endl;
+    cout<<"Water Needs range: "<<fixed<<setprecision(2)<<getWaterNeedsMin()<<" - "<<fixed<<setprecision(2)<<getWaterNeedsMax()<<endl;
+    cout<<"Sun Needs range: "<<fixed<<setprecision(2)<<getSunNeedsMin()<<" - "<<fixed<<setprecision(2)<<getSunNeedsMax()<<endl;
     cout<<"Max Health: "<<fixed<<setprecision(2)<<getMaxHealth()<<endl;
-    cout<<"Health: "<<fixed<<setprecision(2)<<getHealth()<<endl;
-    if(getIsAlive() == true) cout<<"Is Alive: true"<<endl;
-    else cout<<"Is Alive: false"<<endl;
     if(getCanDie() == true) cout<<"Can Die: true"<<endl;
     else cout<<"Can Die: false"<<endl;
     cout<<"Value: "<<fixed<<setprecision(2)<<getValue()<<endl;
     if(getForSale() == true) cout<<"For Sale: true"<<endl;
-    else cout<<"For Sale: false"<<endl;
-    cout<<"Soil Nutrients Level Max: "<<fixed<<setprecision(2)<<getSoilNutrientsLevelMax()<<endl;
+    cout<<"Temperature Needs range: "<<fixed<<setprecision(2)<<getTemperatureNeedsLow()<<" - "<<fixed<<setprecision(2)<<getTemperatureNeedsHigh()<<endl;
+    cout<<"=============="<<endl;
+
+}
+void plant::printPlantDataTemp()
+{
+    cout<<"=============="<<endl;
+    cout<<"Name: " + getName()<<endl;
+    cout<<"Age: "<<fixed<<setprecision(2)<<getAge()<<" days"<<endl;
+    cout<<"Maturity: ";
+    if(getMaturity() == seedling) cout<<"Seedling"<<endl;
+    else if(getMaturity() == juvenile) cout<<"Juvenile"<<endl;
+    else if(getMaturity() == adult) cout<<"Adult"<<endl;
+    if(getCanProduce() == true) cout<<"Can Produce: true"<<endl;
+    else cout<<"Can Produce: false"<<endl;
+    if(getHasFruit() == true) cout<<"Has Fruit: true"<<endl;
+    else cout<<"Has Fruit: false"<<endl;
+    cout<<"Health: "<<fixed<<setprecision(2)<<getHealth()<<"/"<<fixed<<setprecision(2)<<getMaxHealth()<<endl;
     cout<<"Soil Nutrients Level: "<<fixed<<setprecision(2)<<getSoilNutrientsLevel()<<endl;
-    cout<<"Temperature Needs High: "<<fixed<<setprecision(2)<<getTemperatureNeedsHigh()<<endl;
-    cout<<"Temperature Needs Low: "<<fixed<<setprecision(2)<<getTemperatureNeedsLow()<<endl;
+    cout<<"Water Has: "<<fixed<<setprecision(2)<<getWaterHas()<<endl;
+    cout<<"Sunlight Has: "<<fixed<<setprecision(2)<<getSunHas()<<endl;
     cout<<"Temperature Has: "<<fixed<<setprecision(2)<<getTemperatureHas()<<endl;
+    if(getIsAlive() == true) cout<<"Is Alive: true"<<endl;
+    else cout<<"Is Alive: false"<<endl;
+
     cout<<"=============="<<endl;
 
 }

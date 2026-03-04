@@ -142,7 +142,8 @@ public:
     //public member functions
     //age cycle
     void ageCycle();
-    void printPlantData();
+    void printPlantDataPerminent();
+    void printPlantDataTemp();
 
 
 

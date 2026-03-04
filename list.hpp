@@ -65,7 +65,7 @@ void list<T>::printList(plant* type)
     ListNode<T>* pMem = getHead();
     while(pMem != nullptr)
     {
-        pMem->getData()->printPlantData();
+        pMem->getData()->printPlantDataTemp();
         pMem = pMem->getNext();
     }
 
@@ -77,7 +77,7 @@ void list<T>::printList(item* type)
     ListNode<T>* pMem = getHead();
     while(pMem != nullptr)
     {
-        
+
         pMem->getData()->printItem();
         pMem = pMem->getNext();
     }
