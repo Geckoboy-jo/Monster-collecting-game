@@ -12,11 +12,15 @@ void game::gameLoop()
     while(true)
     {
         int userChoice = getuserInput();
-        if(userChoice == 1) gameWrapper->getGameShop()->getPlantInventory()->printList();
+        plant* newPlant = nullptr;
+        item* newItem = nullptr;
+        if(userChoice == 1) gameWrapper->getGameShop()->getPlantInventory()->printList(newPlant);
         else if(userChoice == 2) gameWrapper->getPlantIndex()->printInOrder();
-        else if(userChoice == 3) waterPlant();
-        else if(userChoice == 4) gameWrapper->getCurrentUser()->printUserInfo();
-        else if(userChoice == 5) break;
+        else if(userChoice == 3) gameWrapper->getGameShop()->getItemInventory()->printList(newItem);
+        else if(userChoice == 4) waterPlant();
+        else if(userChoice == 5) gameWrapper->getCurrentUser()->printUserInfo();
+        else if(userChoice == 6) passTime();
+        else if(userChoice == 7) break;
         else cout<<"invalid input, try again"<<endl;
     }
 }
@@ -27,10 +31,12 @@ int game::getuserInput()
     {
         cout<<"what would you like to do?"<<endl;
         cout<<"1. View shop inventory"<<endl;
-        cout<<"2. View plant index"<<endl;
-        cout<<"3. Water plants"<<endl;
-        cout<<"4. View your stats"<<endl;
-        cout<<"5. Exit game"<<endl;
+        cout<<"2. View plant book"<<endl;
+        cout<<"3. View item inventory"<<endl;
+        cout<<"4. Water plants"<<endl;
+        cout<<"5. View your stats"<<endl;
+        cout<<"6. sleep for a day"<<endl;
+        cout<<"7. Exit game"<<endl;
         string input;
         cin>>input;
         try{return stoi(input);}
@@ -64,4 +70,14 @@ void game::waterPlant()
         cout<<"==============="<<endl;
     }
     
+}
+void game::passTime()
+{
+    
+    ListNode<plant*>* pMem = gameWrapper->getGameShop()->getPlantInventory()->getHead();
+    while(pMem != nullptr)
+    {
+        pMem->getData()->ageCycle();
+        pMem = pMem->getNext();
+    }
 }

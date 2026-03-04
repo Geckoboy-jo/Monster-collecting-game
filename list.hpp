@@ -1,4 +1,4 @@
-#include "tree.hpp"
+#include "item.hpp"
 
 
 template<typename T>
@@ -35,7 +35,8 @@ public:
     //public member functions
     void insertAtFront(T newData);
     void removeFromFront();
-    void printList(); 
+    void printList(plant* type); 
+    void printList(item* type);
     void removeFromIndex(int index);
     ListNode<T>* getAtIndex(int index);
 }; 
@@ -58,15 +59,31 @@ void list<T>::removeFromFront()
     delete temp;
 }
 template<typename T>
-void list<T>::printList()
+void list<T>::printList(plant* type)
 {
+    
     ListNode<T>* pMem = getHead();
     while(pMem != nullptr)
     {
         pMem->getData()->printPlantData();
         pMem = pMem->getNext();
     }
+
 }
+template<typename T>
+void list<T>::printList(item* type)
+{
+    
+    ListNode<T>* pMem = getHead();
+    while(pMem != nullptr)
+    {
+        
+        pMem->getData()->printItem();
+        pMem = pMem->getNext();
+    }
+    
+}
+
 template<typename T>
 void list<T>::removeFromIndex(int index)
 {

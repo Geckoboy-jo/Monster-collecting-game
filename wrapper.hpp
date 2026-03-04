@@ -13,6 +13,8 @@ private:
     void retrievGameData();
     void retrieveInventory();
     void saveGameData();
+    void saveInventory();
+    void saveInventory(ListNode<item*>* currentItem, fstream& inventoryFile);
 public:
     wrapper(){
         currentUser = nullptr;

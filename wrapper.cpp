@@ -156,15 +156,7 @@ void wrapper::saveGameData()
     user* currentUser = getCurrentUser();
     userFile<<currentUser->getUserName()<<","<<currentUser->getPassword()<<","<<currentUser->getDisplayName()<<","<<currentUser->getID()<<","<<currentUser->getLevel()<<"\n";
     userFile.close();
-    fstream inventoryFile("inventory.csv", ios::out);
-    inventoryFile<<"itemID,item name,quantity\n";
-    ListNode<item*>* currentItem = gameShop->getItemInventory()->getHead();
-    while(currentItem != nullptr)   {
-        item* currentItemData = currentItem->getData();
-        inventoryFile<<currentItemData->getID()<<","<<currentItemData->getName()<<","<<currentItemData->getQuantity()<<"\n";
-        currentItem = currentItem->getNext();
-    }
-    inventoryFile.close();
+    saveInventory();
 }
 
 
@@ -185,4 +177,22 @@ void wrapper::retrieveInventory()
         newItem->setQuantity(stoi(token));
         gameShop->getItemInventory()->insertAtFront(newItem);
     }
+}
+
+//public save inventory function
+void wrapper::saveInventory()
+{
+    fstream file("inventory.csv", ios::out);
+    file<<"itemID,item name,quantity\n";
+    ListNode<item*>* current = gameShop->getItemInventory()->getHead();
+    saveInventory(current, file);
+    file.close();
+}
+void wrapper::saveInventory(ListNode<item*>* current, fstream& file)
+{
+    if(current == nullptr) return;
+    item* currentItem = current->getData();
+    saveInventory(current->getNext(), file);
+    file<<currentItem->getID()<<","<<currentItem->getName()<<","<<currentItem->getQuantity()<<"\n";
+    
 }

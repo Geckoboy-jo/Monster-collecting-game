@@ -12,6 +12,7 @@ private:
     void gameLoop();
     void waterPlant();
     int getuserInput();
+    void passTime();
 public:
     game(){gameWrapper = new wrapper();}
     ~game(){delete gameWrapper;}
