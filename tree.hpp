@@ -23,17 +23,22 @@ public:
 class BST
 {
 private:
-    Node* root;
+    Node* pRoot;
+    //priavate member functions
     void destroyTree(Node* node);
+    void printInOrder(Node* node);
+    void insert(Node* newNode, Node* pNode);
 public:
-    BST() : root(nullptr){}
-    ~BST(){destroyTree(root);}
+    BST() {pRoot = nullptr;}
+    ~BST(){destroyTree();}
     //getters and setters
-    Node* getRoot(){return root;}
-    void setRoot(Node* newRoot){root = newRoot;}
+    Node* getRoot(){return pRoot;}
+    void setRoot(Node* newRoot){pRoot = newRoot;}
     //public member functions
     void insert(plant* newPlant);
     plant* search(float ID);
+    void printInOrder();
+    void destroyTree();
 
 };
 

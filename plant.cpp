@@ -14,15 +14,15 @@ void plant::ageCycle()
         {
             if(static_cast<int>(getAge()) % static_cast<int>(3/getYeild()) == 0) setHasFruit(true);
         }
-        if(getWaterHas() < getWaterReq()) setHealth(getHealth() - 1);
-        if(getSunHas() < getSunReq()) setHealth(getHealth() - 1);
+        if(getWaterHas() < getWaterNeeds()) setHealth(getHealth() - 1);
+        if(getSunHas() < getSunNeeds()) setHealth(getHealth() - 1);
         if(getTemperatureNeedsLow() < getTemperatureHas()) setHealth(getHealth() - 1);
         if(getSoilNutrientsLevel() < 0) setHealth(getHealth() - 1);
-        if(getWaterHas() > (3/2)*getWaterReq()) setHealth(getHealth() - 1);
-        if(getSunHas() > (3/2)*getSunReq()) setHealth(getHealth() - 1);
+        if(getWaterHas() > (3/2)*getWaterNeeds()) setHealth(getHealth() - 1);
+        if(getSunHas() > (3/2)*getSunNeeds()) setHealth(getHealth() - 1);
         if(getTemperatureHas() > getTemperatureNeedsHigh()) setHealth(getHealth() - 1);
         soilNutrientsLevel--;
-        if((getWaterHas()> getWaterReq())&& (getSunHas() > getSunReq()) && (getTemperatureHas() >= getTemperatureNeedsLow()))
+        if((getWaterHas()> getWaterNeeds())&& (getSunHas() > getSunNeeds()) && (getTemperatureHas() >= getTemperatureNeedsLow()))
         {
             if(getTemperatureHas() <= getTemperatureNeedsHigh()) setHealth(getHealth() + 1);
         } 
@@ -34,7 +34,7 @@ void plant::ageCycle()
     }
     else
     {
-        if((getWaterHas()> getWaterReq())&& (getSunHas() > getSunReq()) && (getTemperatureHas() >= getTemperatureNeedsLow()))
+        if((getWaterHas()> getWaterNeeds())&& (getSunHas() > getSunNeeds()) && (getTemperatureHas() >= getTemperatureNeedsLow()))
         {
             if(getTemperatureHas() <= getTemperatureNeedsHigh()) setHealth(getHealth() + 1);
         } 
@@ -55,9 +55,9 @@ void plant::printPlantData()
     cout<<"Age: " + to_string(getAge())<<endl;
     cout<<"Maturity: " + to_string(getMaturity())<<endl;
     cout<<"Has Fruit: " + to_string(getHasFruit())<<endl;
-    cout<<"Water Needs: " + to_string(getWaterReq())<<endl;
+    cout<<"Water Needs: " + to_string(getWaterNeeds())<<endl;
     cout<<"Water Has: " + to_string(getWaterHas())<<endl;
-    cout<<"Sun Needs: " + to_string(getSunReq())<<endl;
+    cout<<"Sun Needs: " + to_string(getSunNeeds())<<endl;
     cout<<"Sun Has: " + to_string(getSunHas())<<endl;
     cout<<"Health: " + to_string(getHealth())<<endl;
     cout<<"Is Alive: " + to_string(getIsAlive())<<endl;

@@ -14,7 +14,7 @@ class plant
 {
 private:
     string name;//plant name
-    float ID;//type of plant
+    int ID;//type of plant
 
     //a growth rate of 1 means that is takes 10 cycles for the plant to reach adulthood
     float growRate;//rate the plant grows
@@ -53,11 +53,34 @@ private:
     float temperatureNeedsLow;//the temperature the plant needs
     float temperatureHas;//the temperature the plant has  
 public:
-    plant(float id) : ID(id) {}
+    plant(int id) : ID(id) {
+        name = "default";
+        growRate = 1;
+        canProduce = true;
+        yeild = 1;
+        age = 0;
+        maturity = seedling;
+        hasFruit = false;
+        waterNeeds = 1;
+        waterHas = 0;
+        sunNeeds = 1;
+        sunHas = 0;
+        maxHealth = 10;
+        health = maxHealth;
+        isAlive = true;
+        canDie = false;
+        value = 1;
+        ForSale = false;
+        soilNutrientsLevelMax = 10;
+        soilNutrientsLevel = soilNutrientsLevelMax/2;
+        temperatureNeedsHigh = 30;
+        temperatureNeedsLow = 0;
+        temperatureHas = (temperatureNeedsHigh + temperatureNeedsLow)/2;
+    }
     ~plant(){}
     //getters and setters
     string getName(){return name;}
-    float getID(){return ID;}
+    int getID(){return ID;}
     float getGrowRate(){return growRate;}
     bool getCanProduce(){return canProduce;}
     float getYeild(){return yeild;}
@@ -81,6 +104,7 @@ public:
     float getTemperatureHas(){return temperatureHas;}
 
     void setName(string newName){name = newName;}
+    void setID(int newID){ID = newID;}
     void setGrowRate(float newGrowRate){growRate = newGrowRate;}
     void setCanProduce(bool newCanProduce){canProduce = newCanProduce;}
     void setYeild(float newYeild){yeild = newYeild;}
