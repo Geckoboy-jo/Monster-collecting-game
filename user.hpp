@@ -24,6 +24,7 @@ public:
     void setDisplayName(string newName){displayName =  newName;}
     void setID(int newID){ID=newID;}
     void setLevel(int newLevel){level = newLevel;}
-    
+    //public member functions
+    void printUserInfo();
 
 };
