@@ -66,13 +66,29 @@ void game::waterPlant()
             int choice = stoi(input);
             if(choice<1 || choice>=index) throw out_of_range("invalid input, try again");
             plant* chosenPlant = gameWrapper->getGameShop()->getPlantInventory()->getAtIndex(choice-1)->getData();
-            chosenPlant->setWaterHas(chosenPlant->getWaterHas()+1);
+            try
+            {
+                cout<<"how much water would you like to give your plant?"<<endl;
+                string input;
+                cin>>input;
+                int waterAmount = stoi(input);
+                if(waterAmount<0) throw out_of_range("invalid input, try again");
+                plant* chosenPlant = gameWrapper->getGameShop()->getPlantInventory()->getAtIndex(choice-1)->getData();
+                chosenPlant->setWaterHas(chosenPlant->getWaterHas()+waterAmount);
+            }
+            catch(invalid_argument& e){cout<<"invalid input, try again"<<endl;}
+            cout<<"==============="<<endl;
             cout<<"you watered "<<chosenPlant->getName()<<" it now has "<<fixed<<setprecision(2)<<chosenPlant->getWaterHas()<<" water"<<endl;
             break;
+
         }
         catch(invalid_argument& e){cout<<"invalid input, try again"<<endl;}
-        cout<<"==============="<<endl;
+        cout<<"how much water would you like to give your plant?"<<endl;
+        
     }
+    
+        
+    
     
 }
 void game::passTime()
@@ -133,7 +149,7 @@ void game::harvestPlant()
             else numSkipped++;
             pMem = pMem->getNext();
         }
-        if(numSkipped == index-1) {
+        if(index == 1) {
             cout<<"you have no plants with fruit to harvest"<<endl;
             break;
         }
