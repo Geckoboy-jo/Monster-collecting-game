@@ -20,9 +20,10 @@ void game::gameLoop()
         else if(userChoice == 4) waterPlant();
         else if(userChoice == 5) repotPlant();
         else if(userChoice == 6) harvestPlant();
-        else if(userChoice == 7) gameWrapper->getCurrentUser()->printUserInfo();
-        else if(userChoice == 8) passTime();
-        else if(userChoice == 9) break;
+        else if(userChoice == 7) plantPlant();
+        else if(userChoice == 8) gameWrapper->getCurrentUser()->printUserInfo();
+        else if(userChoice == 9) passTime();
+        else if(userChoice == 10) break;
         else cout<<"invalid input, try again"<<endl;
     }
 }
@@ -38,9 +39,10 @@ int game::getuserInput()
         cout<<"4. Water plants"<<endl;
         cout<<"5. Repot plants"<<endl;
         cout<<"6. Harvest plants"<<endl;
-        cout<<"7. View your stats"<<endl;
-        cout<<"8. Sleep for a day"<<endl;
-        cout<<"9. Exit game"<<endl;
+        cout<<"7. Plant a new plant"<<endl;
+        cout<<"8. View your stats"<<endl;
+        cout<<"9. Sleep for a day"<<endl;
+        cout<<"10. Exit game"<<endl;
         string input;
         cin>>input;
         try{return stoi(input);}
@@ -64,7 +66,7 @@ void game::waterPlant()
         try
         {
             int choice = stoi(input);
-            if(choice<1 || choice>=index) throw out_of_range("invalid input, try again");
+            if(choice<1 || choice>=index-1) throw out_of_range("invalid input, try again");
             plant* chosenPlant = gameWrapper->getGameShop()->getPlantInventory()->getAtIndex(choice-1)->getData();
             try
             {
@@ -73,7 +75,7 @@ void game::waterPlant()
                 cin>>input;
                 int waterAmount = stoi(input);
                 if(waterAmount<0) throw out_of_range("invalid input, try again");
-                plant* chosenPlant = gameWrapper->getGameShop()->getPlantInventory()->getAtIndex(choice-1)->getData();
+                chosenPlant = gameWrapper->getGameShop()->getPlantInventory()->getAtIndex(choice-1)->getData();
                 chosenPlant->setWaterHas(chosenPlant->getWaterHas()+waterAmount);
             }
             catch(invalid_argument& e){cout<<"invalid input, try again"<<endl;}
@@ -182,4 +184,57 @@ void game::getSeed(int plantID)
     for(int i=0; i<plantID; i++) pMem = pMem->getNext();
     pMem->getData()->setQuantity(pMem->getData()->getQuantity()+1);
     cout<<"you got a "<<pMem->getData()->getName()<<" seed! you now have "<<pMem->getData()->getQuantity()<<" "<<pMem->getData()->getName()<<" seeds!"<<endl;
+}
+
+void game::plantPlant()
+{
+    while(true)
+    {
+        cout<<"which seed would you like to plant?"<<endl;
+        cout<<"==============="<<endl;
+        ListNode<item*>* pMem = gameWrapper->getGameShop()->getItemInventory()->getHead();
+        int index = 1;
+        while(pMem != nullptr) {
+            if(pMem->getData()->getQuantity() > 0)
+            {
+                cout<<index<<". "<<pMem->getData()->getName()<<" seeds: "<<pMem->getData()->getQuantity()<<endl;
+                index++;
+            }
+            pMem = pMem->getNext();
+        }
+        if(index == 1) {
+            cout<<"you have no seeds to plant"<<endl;
+            break;
+        }
+        else
+        {
+            string input;
+            cin>>input;
+            try
+            {
+                int choice = stoi(input);
+                if(choice<1 || choice>=index) throw out_of_range("invalid input, try again");
+                ListNode<item*>* itemNode = gameWrapper->getGameShop()->getItemInventory()->getHead();
+                while(choice!=0)
+                {
+                    if(itemNode->getData()->getQuantity() > 0) choice--;
+                    if(choice == 0) break;
+                    itemNode = itemNode->getNext();
+                }
+                itemNode->getData()->setQuantity(itemNode->getData()->getQuantity()-1);
+                plant* currentPlant = gameWrapper->getPlantIndex()->search(itemNode->getData()->getID());
+                plant* newPlant = new plant(currentPlant);
+                gameWrapper->getGameShop()->getPlantInventory()->insertAtFront(newPlant);
+                gameWrapper->getGameShop()->setAmbaince();
+                cout<<"you planted a "<<currentPlant->getName()<<" seed! it is now growing in your shop!"<<endl;
+                break;
+                
+            }
+            catch(invalid_argument& e){cout<<"invalid input, try again"<<endl;}
+
+        }
+        
+        
+        cout<<"==============="<<endl;
+    }
 }

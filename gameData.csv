@@ -1,2 +1,5 @@
 ID,age,canProduce,hasFruit,health,soilNutrientsLevel,ForSale,waterHas
-1,57,1,0,0,10,0,91
+2,0,1,0,10,10,0,0
+2,0,1,0,10,10,0,0
+1,0,1,0,12,10,0,0
+1,57,1,0,12,10,0,3

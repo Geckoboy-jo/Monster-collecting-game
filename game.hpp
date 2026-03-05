@@ -16,6 +16,7 @@ private:
     void repotPlant();
     void harvestPlant();
     void getSeed(int plantID);
+    void plantPlant();
 public:
     game(){gameWrapper = new wrapper();}
     ~game(){delete gameWrapper;}
