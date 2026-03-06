@@ -66,7 +66,7 @@ void game::waterPlant()
         try
         {
             int choice = stoi(input);
-            if(choice<1 || choice>=index-1) throw out_of_range("invalid input, try again");
+            if(choice<1 || choice>=index) throw out_of_range("invalid input, try again");
             plant* chosenPlant = gameWrapper->getGameShop()->getPlantInventory()->getAtIndex(choice-1)->getData();
             try
             {
